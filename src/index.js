@@ -1,5 +1,5 @@
 import http from 'http';
-import app from './config/express';
+import app from './express';
 import { log } from './utils';
 
 app.on('ready', () => {

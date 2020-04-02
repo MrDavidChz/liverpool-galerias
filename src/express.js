@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
 import httpStatus from 'http-status';
+import routes from './routes'
 const app       = express();
 const connUri   = process.env.MONGO_CONN_URL;
 
@@ -34,6 +35,7 @@ class ExpressApp {
 		app.disable('x-powered-by');
 		app.use(compression());
 		app.use(cors());
+		app.use('/', routes);
 	}
 
 	helmetSecurity = () => {
