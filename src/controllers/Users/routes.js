@@ -1,19 +1,22 @@
 import express from 'express'
 import controller from './index'
+import controllerLogin from '../Auth.controller'
 import { controllerHandler }  from '../../utils'
 const router = express.Router();
+import auth from '../../middlewares/auth'
 
-class BrandsRoutes {
+class UsersRoutes {
   
   constructor() {
     
-    router.get('/brand/' , controllerHandler(controller.getAll) );
-    router.get('/brand/:id' , controllerHandler(controller.show));
-    router.post('/brand/create' , controllerHandler(controller.create));
-    router.put('/brand/edit/:id' , controllerHandler(controller.edit));
-    router.delete('/brand/delete/:id' , controllerHandler(controller.delete));
+    router.get('/' ,[ auth.isAuth ,auth.checkRole() ] , controllerHandler(controller.getAll) );
+    router.get('/:id' , [ auth.isAuth ,auth.checkRole() ] ,controllerHandler(controller.show));
+    router.post('/create' , controllerHandler(controller.create));
+    router.put('/edit/:id' ,[ auth.isAuth ,auth.checkRole() ] , controllerHandler(controller.edit));
+    router.delete('/delete/:id' ,[ auth.isAuth ,auth.checkRole() ] , controllerHandler(controller.delete));
+    router.post('/login' , controllerHandler(controllerLogin.login));
     return router;
   }
 
 }
-export default new BrandsRoutes();
+export default new UsersRoutes();

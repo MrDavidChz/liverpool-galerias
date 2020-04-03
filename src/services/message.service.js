@@ -14,6 +14,8 @@ class MessageService {
         INSERT_ERROR: `Error occurred while adding new ${entity.toLowerCase()}`,
         UPDATE_ERROR: `Error occurred while updating ${entity.toLowerCase()}`,
         DELETE_ERROR: `Error occurred while removing ${entity.toLowerCase()}`,
+        INVALID_LOGIN: 'Invalid user or password!',
+        LOGGED_IN_SUCCESS: 'User logged in successfully.',        
       };
       const messages = {};
       Object.keys(allMessages).forEach(key => {

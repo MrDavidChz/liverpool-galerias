@@ -1,7 +1,42 @@
 import httpStatus from 'http-status';
 import Debug from 'debug';
+import bcrypt from 'bcrypt'
 class Utils {
+	getPasswordHash = password => bcrypt.hashSync(password, 10);
 
+	sendError = (res, status, message)=> {
+		return res.status(status).json({
+			status,
+			success:false,
+			message: message 
+		});
+	};	
+
+	handleError = (res, err,statusCode) => {
+		let errors = '';
+		if (err.errors) {
+		  errors = err.errors[Object.keys(err.errors)[0]].message;
+		}
+		if (!errors && err.message !== '') {
+		  errors = err.message;
+		}
+		console.error(`Error ===> ${errors}`);
+		return this.errorWithProperty(res, errors,{status:statusCode || 401 } , statusCode  );
+	  };	
+
+	  errorWithProperty = (res, message, response, statusCode) => res
+	  .status(statusCode || 200)
+	  .send(
+		Object.assign(
+		  {
+			message: message || 'Error',
+			success: false,
+			data: null,
+		  },
+		  response,
+		),
+	  )
+	  .end();	  
 }
 export default new Utils();
 
