@@ -5,6 +5,12 @@ class MessageService {
     constructor(entity) {
       const allMessages = {
         NOT_FOUND: `${entity} not found!`,
+        LIST_SUCCESS: `${entity} list fetched successfully`,
+        SHOW_SUCCESS: `${entity} found successfully`,
+        ERROR: 'some error occured!',
+        INSERT_SUCCESS: `${entity} added successfully`,
+        UPDATE_SUCCESS: `${entity} updated successfully`,
+        DELETE_SUCCESS: `${entity} deleted successfully`,
         INSERT_ERROR: `Error occurred while adding new ${entity.toLowerCase()}`,
         UPDATE_ERROR: `Error occurred while updating ${entity.toLowerCase()}`,
         DELETE_ERROR: `Error occurred while removing ${entity.toLowerCase()}`,
