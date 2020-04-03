@@ -9,10 +9,10 @@ export const log = Debug('express:api', {reloadEnv: true});
 
 export const status = httpStatus;
 
-export const controllerHandler = (promise, params) => async (req, res, next) => {
-	const boundParams = params ? params(req, res, next) : [];
+export const controllerHandler = (promise) => async (req, res, next) => {
+
 	try {
-	  const result = await promise(...boundParams);
+	  const result =  await promise(req, res, next);
 	  return res.json(result);
 	} catch (err) {
 	  if (!err.code) {

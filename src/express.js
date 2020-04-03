@@ -4,17 +4,19 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
 import httpStatus from 'http-status';
+import bodyParser from 'body-parser';
 import routes from './routes'
 const app       = express();
 const connUri   = process.env.MONGO_CONN_URL;
-
+const apiVersion = process.env.API_VERSION
 class ExpressApp {
 	constructor() {
         
 		mongoose.connect(connUri, {
                 useUnifiedTopology: true,
                 useNewUrlParser: true,
-                useCreateIndex:true				
+				useCreateIndex:true,
+				useFindAndModify: false		
             })
             .then(() =>{
         
@@ -35,7 +37,9 @@ class ExpressApp {
 		app.disable('x-powered-by');
 		app.use(compression());
 		app.use(cors());
-		app.use('/', routes);
+		app.use(bodyParser.json());
+		app.use(bodyParser.urlencoded({ extended: true })); 
+		app.use(apiVersion , routes);
 	}
 
 	helmetSecurity = () => {
