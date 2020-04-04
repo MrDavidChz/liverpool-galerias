@@ -54,3 +54,15 @@ URL : https://liverpool-galerias.herokuapp.com/api/v1/
 ```
 URL : https://documenter.getpostman.com/view/10961843/SzYbxc7P?version=latest
 ```
+
+- Para efectos de prueba ya existe 2 usuarios con diferente rol en la liga de productiva https://liverpool-galerias.herokuapp.com/api/v1/
+
+```
+Rol INQUILINO
+username:inquilino
+password:123456
+
+Rol ADMIN
+username:admin
+password:123456
+```
